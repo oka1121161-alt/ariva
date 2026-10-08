@@ -1,0 +1,9 @@
+.faq-page{padding-top:30px;background:radial-gradient(ellipse at 0 30%,#f3eff950,transparent 65%)}.faq-back{display:inline-flex;align-items:center;min-height:44px;font-size:12px;color:#91859f}.faq-process{padding:45px 0 95px;border:0;gap:70px;grid-template-columns:minmax(0,.8fr) minmax(0,1.25fr)}.faq-process .process-intro{align-self:start;position:sticky;top:35px}.faq-process h1{font-size:clamp(34px,3.8vw,54px);letter-spacing:-2px;line-height:1.15;margin:0 0 24px}.faq-process h1 span{display:block;color:#9b90bd;font-size:.7em;margin-top:12px;letter-spacing:-1.2px}.faq-process .process-step h2{margin:0;font-size:inherit;letter-spacing:normal}.faq-process .process-meter{margin-top:40px}.faq-process .text-button{color:var(--purple)}
+@media(max-width:800px){.faq-process{grid-template-columns:1fr;gap:35px;padding-top:24px}.faq-process .process-intro{position:static}.faq-process .process-meter{display:none}.faq-process h1{font-size:40px}.faq-process .process-description{max-width:420px}}
+@media(max-width:480px){.faq-page{padding-top:15px}.faq-process{padding-bottom:55px}.faq-process h1{font-size:35px}.faq-process .step-title{font-size:15px}}
+
+/* Plain answer paragraphs and a conventional list, retaining the existing accordion. */
+.faq-process .step-content p+p{margin-top:14px}
+.faq-process .step-content ul{padding-left:18px;margin:12px 0;font-size:13px;line-height:1.85;color:#74798b}
+.faq-process .step-content li+li{margin-top:7px}
+.faq-process .step-content a{color:var(--purple);text-decoration:underline;text-underline-offset:3px}

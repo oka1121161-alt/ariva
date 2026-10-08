@@ -1,0 +1,23 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="684" height="156" viewBox="0 0 342 78" fill="none">
+ <title>ARIVA — gradient wordmark</title>
+ <desc>Editable vector source. Separate symbol and lettering groups. Transparent background; all letters are vector paths, no external fonts.</desc>
+ <defs>
+  <linearGradient id="wordmark-gradient" x1="92" y1="24" x2="330" y2="62" gradientUnits="userSpaceOnUse">
+   <stop stop-color="#252738"/><stop offset=".48" stop-color="#403852"/><stop offset="1" stop-color="#7860CE"/>
+  </linearGradient>
+  <linearGradient id="symbol-gradient" x1="17" y1="13" x2="57" y2="65" gradientUnits="userSpaceOnUse">
+   <stop stop-color="#242635"/><stop offset="1" stop-color="#5E4C8D"/>
+  </linearGradient>
+ </defs>
+ <g id="ariva-symbol" fill="url(#symbol-gradient)">
+  <path d="M30 5 23 18 49 66H62L30 5Z"/>
+  <path d="M3 66H16C18 53 26 45 35 43 19 43 9 52 3 66Z"/>
+ </g>
+ <g id="ariva-wordmark" fill="url(#wordmark-gradient)">
+  <path id="letter-a-first" fill-rule="evenodd" d="M91 58 113 20H121L143 58H135L129.5 48H104.5L99 58H91ZM108 42H126L117 26 108 42Z"/>
+  <path id="letter-r" fill-rule="evenodd" d="M157 58V20H182C194 20 201 24.5 201 32.5 201 38.5 197 42.5 190 44L204 58H194L181 45H164V58H157ZM164 39H181C189.5 39 194 37 194 32.5S189.5 26 181 26H164V39Z"/>
+  <path id="letter-i" d="M219 20H226V58H219Z"/>
+  <path id="letter-v" d="M239 20H247L264 51 281 20H289L268 58H260L239 20Z"/>
+  <path id="letter-a-last" fill-rule="evenodd" d="M290 58 312 20H320L342 58H334L328.5 48H303.5L298 58H290ZM307 42H325L316 26 307 42Z"/>
+ </g>
+</svg>

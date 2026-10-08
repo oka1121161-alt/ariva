@@ -1,0 +1,6 @@
+/* Plain answers, using the same content layout as the FAQ. */
+#process .step-content p+p{margin-top:14px}
+#process .step-content strong{font-weight:700}
+#process .step-content a{color:var(--purple);text-decoration:underline;text-underline-offset:3px}
+@media(min-width:801px){#process .process-intro{position:sticky;top:32px;align-self:start}}
+@media(max-width:800px){#process .process-intro{margin-bottom:30px}}
