@@ -24,37 +24,65 @@ brandTrack.querySelectorAll('.brand-set[aria-hidden] a').forEach(brand=>{brand.t
  carousel.addEventListener('pointerenter',event=>{if(event.pointerType==='mouse')hovered=true});
  carousel.addEventListener('pointerleave',event=>{if(event.pointerType==='mouse')hovered=false});
  carousel.addEventListener('dragstart',event=>event.preventDefault());
- carousel.addEventListener('pointerdown',event=>{
-  if(!event.isPrimary||event.button!==0)return;
+ // Touch gestures use non-passive Touch Events: Safari can cancel Pointer Events
+ // when it takes over scrolling, before a pointer capture is established.
+ const beginDrag=(id,x,y,type)=>{
   suppressClick=false;
-  pointer={id:event.pointerId,x:event.clientX,y:event.clientY,offset,dragging:false};
- });
- carousel.addEventListener('pointermove',event=>{
-  if(!pointer||pointer.id!==event.pointerId)return;
-  const dx=event.clientX-pointer.x,dy=event.clientY-pointer.y;
+  pointer={id,x,y,type,offset,dragging:false};
+ };
+ const dragTo=(x,y,event)=>{
+  const dx=x-pointer.x,dy=y-pointer.y;
   if(!pointer.dragging){
-   if(Math.abs(dx)<(event.pointerType==='mouse'?5:8))return;
-   if(event.pointerType!=='mouse'&&Math.abs(dy)>Math.abs(dx)){pointer=null;return;}
+   const threshold=pointer.type==='mouse'?5:8;
+   if(Math.max(Math.abs(dx),Math.abs(dy))<threshold)return;
+   if(pointer.type!=='mouse'&&Math.abs(dy)>Math.abs(dx)){releaseDrag();return;}
    pointer.dragging=true;
    carousel.classList.add('is-dragging');
-   carousel.setPointerCapture(event.pointerId);
   }
-  event.preventDefault();
+  if(event.cancelable)event.preventDefault();
   offset=wrap(pointer.offset-dx);
   render();
- });
- const release=event=>{
-  if(!pointer||pointer.id!==event.pointerId)return;
-  suppressClick=pointer.dragging&&event.type!=='pointercancel';
+ };
+ const releaseDrag=()=>{
+  if(!pointer)return;
+  // Keep links inactive after a swipe, including Safari's delayed click.
+  suppressClick=pointer.dragging;
   pointer=null;
   carousel.classList.remove('is-dragging');
+ };
+ carousel.addEventListener('touchstart',event=>{
+  if(event.touches.length!==1){releaseDrag();return;}
+  const touch=event.touches[0];
+  beginDrag(touch.identifier,touch.clientX,touch.clientY,'touch');
+ },{passive:true});
+ carousel.addEventListener('touchmove',event=>{
+  if(!pointer||pointer.type!=='touch')return;
+  if(event.touches.length!==1){releaseDrag();return;}
+  const touch=[...event.touches].find(touch=>touch.identifier===pointer.id);
+  if(touch)dragTo(touch.clientX,touch.clientY,event);
+ },{passive:false});
+ carousel.addEventListener('touchend',releaseDrag,{passive:true});
+ carousel.addEventListener('touchcancel',releaseDrag,{passive:true});
+ carousel.addEventListener('pointerdown',event=>{
+  if(event.pointerType==='touch'||!event.isPrimary||event.button!==0)return;
+  beginDrag(event.pointerId,event.clientX,event.clientY,event.pointerType);
+  carousel.setPointerCapture(event.pointerId);
+ });
+ carousel.addEventListener('pointermove',event=>{
+  if(!pointer||pointer.type==='touch'||pointer.id!==event.pointerId)return;
+  dragTo(event.clientX,event.clientY,event);
+ });
+ const release=event=>{
+  if(!pointer||pointer.type==='touch'||pointer.id!==event.pointerId)return;
+  releaseDrag();
   if(carousel.hasPointerCapture(event.pointerId))carousel.releasePointerCapture(event.pointerId);
  };
  window.addEventListener('pointerup',release);
  window.addEventListener('pointercancel',release);
  carousel.addEventListener('lostpointercapture',release);
+ window.addEventListener('blur',releaseDrag);
  carousel.addEventListener('click',event=>{
-  if(suppressClick&&event.detail!==0){event.preventDefault();event.stopPropagation();suppressClick=false;}
+  if(suppressClick){event.preventDefault();event.stopPropagation();suppressClick=false;}
  },true);
  carousel.addEventListener('keydown',event=>{
   if(event.key!=='ArrowLeft'&&event.key!=='ArrowRight')return;

@@ -37,7 +37,7 @@
 .brand-track{animation-duration:160s}
 .brands:has(.brand:focus-visible) .brand-track{animation-play-state:paused}
 .brands.is-draggable{cursor:grab;touch-action:pan-y;user-select:none;-webkit-user-select:none;overflow:hidden}
-.brands.is-draggable .brand{cursor:grab;-webkit-user-drag:none}
+.brands.is-draggable .brand{cursor:grab;-webkit-user-drag:none;-webkit-touch-callout:none;touch-action:pan-y}
 .brands.is-draggable .brand-track{animation:none;will-change:transform}
 .brands.is-draggable .brand-set[aria-hidden=true]{display:flex}
 .brands.is-dragging,.brands.is-dragging .brand{cursor:grabbing}
