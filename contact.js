@@ -38,6 +38,7 @@
  const policy=document.querySelector('#callback-policy');
  policy.querySelector('button').addEventListener('click',()=>policy.close());
  const popup=document.querySelector('#callback-dialog');
+ if(!popup)return;
  document.querySelectorAll('[data-callback]').forEach(button=>button.addEventListener('click',()=>popup.showModal()));
  popup.querySelector('.dialog-close').addEventListener('click',()=>popup.close());
  popup.addEventListener('click',event=>{if(event.target===popup){const r=popup.getBoundingClientRect();if(event.clientX<r.left||event.clientX>r.right||event.clientY<r.top||event.clientY>r.bottom)popup.close()}});
