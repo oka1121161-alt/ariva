@@ -20,7 +20,7 @@ function catalogSpecs(car){
  values.push(car.drive);
  return values;
 }
-function catalogCard(car){return `<article class="catalog-card" role="listitem" data-car-page="car-${car.id}.html"><div class="catalog-image"><img src="assets/catalog/${car.image}" alt="${car.name}" loading="lazy" decoding="async" width="1400" height="1050" style="object-position:${car.position||'50% 50%'}">${car.year?`<span class="catalog-year">${car.year}</span>`:''}</div><div class="catalog-card-body"><div class="catalog-car-heading"><h3><a href="car-${car.id}.html">${car.name}</a></h3>${car.trim?`<span>${car.trim}</span>`:''}</div><ul class="catalog-specs" aria-label="Параметры">${catalogSpecs(car).map(value=>`<li>${value}</li>`).join('')}</ul><div class="catalog-card-footer"><div class="catalog-price"><span>Стоимость</span><strong${car.price?'':' class="catalog-price-pending"'}>${car.price?`${car.price} <small>$</small>`:'По запросу'}</strong></div><button class="catalog-request" type="button" data-catalog-id="${car.id}" aria-label="Открыть ${car.name}"><span aria-hidden="true">↗</span></button></div></div></article>`}
+function catalogCard(car){return `<article class="catalog-card" role="listitem" data-car-page="car-${car.id}.html"><div class="catalog-image"><img src="assets/catalog/${car.image}" alt="${car.name}" loading="lazy" decoding="async" width="1400" height="1050" style="object-position:${car.position||'50% 50%'}">${car.year?`<span class="catalog-year">${car.year}</span>`:''}</div><div class="catalog-card-body"><div class="catalog-car-heading"><h3><a href="car-${car.id}.html">${car.name}</a></h3>${car.trim?`<span>${car.trim}</span>`:''}</div><ul class="catalog-specs" aria-label="Параметры">${catalogSpecs(car).map(value=>`<li>${value}</li>`).join('')}</ul><div class="catalog-card-footer"><div class="catalog-price"><span>Стоимость</span><strong${car.price?'':' class="catalog-price-pending"'}>${car.price?`${car.price} <small>$</small>`:'По запросу'}</strong></div></div></div></article>`}
 function catalogPosition(){
  if(!catalogMobile.matches)return;
  const cards=[...catalogGrid.children];if(!cards.length)return;
@@ -51,7 +51,7 @@ function renderCatalog(){
  catalogGrid.scrollTo({left:0,behavior:'instant'});
  catalogMore.hidden=false;
  catalogMore.setAttribute('aria-expanded',String(catalogExpanded));
- catalogMore.innerHTML=catalogExpanded?'Свернуть подборку <span aria-hidden="true">↑</span>':'Показать все автомобили <span aria-hidden="true">↗</span>';
+ catalogMore.innerHTML=catalogExpanded?'Свернуть подборку <span aria-hidden="true">↑</span>':'Показать все автомобили';
  catalogCount.textContent=`${catalogVisible.length} из ${cars.length} автомобилей`;
  catalogPosition();
 }
