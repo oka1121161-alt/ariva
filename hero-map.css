@@ -8,6 +8,8 @@
 .hero-route-map svg{mask-image:linear-gradient(90deg,transparent,#000 7%,#000 96%,transparent),linear-gradient(180deg,transparent,#000 6%,#000 91%,transparent);mask-composite:intersect}
 .map-hero .premium-benefits .premium-benefit-highlight{font-weight:750;color:#443651}
 
+.map-hero .premium-benefits{margin:0 0 26px}
+
 /* A single editorial composition on stacked layouts: copy, map, then action. */
 @media(max-width:800px){
  .map-hero{display:grid;grid-template-columns:minmax(0,640px);justify-content:center;min-height:0!important;padding:36px 24px 32px;gap:0;background:radial-gradient(ellipse at 70% 42%,#f1ecfc80,transparent 64%),#fff}
@@ -17,25 +19,26 @@
  .map-hero .hero-route-map{grid-row:3;position:relative;inset:auto;width:calc(100% + 48px);margin:16px -24px 4px;align-self:center}
  .map-hero .hero-route-map svg{border-radius:0;mask-image:linear-gradient(90deg,transparent,#000 4%,#000 96%,transparent),linear-gradient(180deg,transparent,#000 9%,#000 85%,transparent);mask-composite:intersect}
  .map-hero .route-map-image{opacity:.92;filter:saturate(.65)}
- .map-hero .premium-actions{grid-row:4;display:block;margin:0}
+ .map-hero .premium-actions{grid-row:5;display:block;width:100%;max-width:440px;justify-self:center;margin:22px 0 0}
  .map-hero .premium-actions .button{width:100%;min-height:52px;padding:16px 24px;border-radius:10px;font-size:14px;font-weight:650;box-shadow:0 6px 20px #6750ed18}
- .map-hero .premium-benefits{grid-row:5;display:grid;grid-template-columns:1fr 1fr;gap:0 20px;margin:24px 0 0}
- .map-hero .premium-benefits li{display:block;padding:13px 0 10px;border-top:1px solid #e6e1ef;font-size:12px;line-height:1.6;font-weight:500;color:#646a7b}
- .map-hero .premium-benefits li:before{display:none}
- .map-hero .premium-benefits .premium-benefit-highlight{color:#57408d;font-weight:700;border-color:#cbbce8}
+ .map-hero .premium-benefits{grid-row:4;display:grid;grid-template-columns:1fr;gap:10px;width:100%;max-width:440px;justify-self:center;margin:8px 0 0}
+ .map-hero .premium-benefits li{display:grid;grid-template-columns:8px 1fr;align-items:baseline;gap:12px;padding:0;border:0;font-size:13px;line-height:1.55;font-weight:500;color:#62687a}
+ .map-hero .premium-benefits li:before{display:block;content:"";width:8px;height:1px;border-radius:0;background:#b4a2d5;align-self:center}
+ .map-hero .premium-benefits .premium-benefit-highlight{display:block;margin-top:4px;padding-top:15px;border-top:1px solid #e6e0ee;color:#443651;font-weight:700}
+ .map-hero .premium-benefits .premium-benefit-highlight:before{display:none}
 }
 @media(min-width:501px) and (max-width:800px){
  .map-hero{padding-top:44px;padding-bottom:40px}
  .map-hero .premium-copy h1{letter-spacing:-2.5px}
  .map-hero .premium-intro{font-size:16px;max-width:510px}
  .map-hero .hero-route-map{margin-top:8px;margin-bottom:-2px}
- .map-hero .premium-benefits{gap:0 32px}
- .map-hero .premium-benefits li{font-size:14px;padding-top:16px}
+ .map-hero .premium-benefits{gap:12px;margin-top:12px}
+ .map-hero .premium-benefits li{font-size:14px}
 }
 @media(max-width:360px){
  .map-hero{padding:30px 18px 26px}
  .map-hero .premium-intro{font-size:13px}
  .map-hero .hero-route-map{width:calc(100% + 36px);margin-inline:-18px}
- .map-hero .premium-benefits{column-gap:16px;margin-top:20px}
- .map-hero .premium-benefits li{font-size:11px}
+ .map-hero .premium-benefits{margin-top:8px}
+ .map-hero .premium-benefits li{font-size:12px}
 }
