@@ -36,8 +36,10 @@
   const method=form.elements.method.value;
   const payload={name:form.elements.name.value.trim(),method,messenger:method==='messenger'?form.elements.messenger.value:null,contact:contact.value.trim(),consent:form.elements.consent.checked,website:form.elements.website?.value||''};
   sending=true;submit.disabled=true;form.setAttribute('aria-busy','true');action.textContent='Отправляем…';status.textContent='';
+  const controller=new AbortController();
+  const timeout=setTimeout(()=>controller.abort(),18000);
   try{
-   const result=await fetch(endpoint,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(payload),signal:AbortSignal.timeout(18000)});
+   const result=await fetch(endpoint,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(payload),signal:controller.signal});
    const data=await result.json();
    if(!result.ok||data.ok!==true)throw new Error('delivery_failed');
    form.reset();Object.keys(drafts).forEach(key=>drafts[key]='');contact.value='';update();
@@ -45,6 +47,7 @@
   }catch{
    status.textContent='Не удалось отправить заявку. Попробуйте ещё раз или свяжитесь с нами по телефону или в Telegram.';
   }finally{
+   clearTimeout(timeout);
    sending=false;submit.disabled=false;form.removeAttribute('aria-busy');action.textContent=form.elements.method.value==='messenger'?'Напишите мне':'Перезвоните мне';
   }
  });
