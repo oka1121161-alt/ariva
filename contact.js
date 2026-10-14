@@ -23,15 +23,33 @@
  }
  form.querySelectorAll('input[type=radio]').forEach(input=>input.addEventListener('change',update));
  contact.addEventListener('input',()=>{contact.setCustomValidity('');status.textContent=''});
- form.addEventListener('submit',event=>{
+ let sending=false;
+ form.addEventListener('submit',async event=>{
   event.preventDefault();
+  if(sending||!form.reportValidity())return;
   if(!form.elements.name.value.trim()){form.elements.name.setCustomValidity('Пожалуйста, укажите ваше имя.');form.elements.name.reportValidity();return}
   if(active!=='telegram'&&(!/^[+0-9() .-]+$/.test(contact.value)||contact.value.replace(/\D/g,'').length<7)){contact.setCustomValidity('Укажите номер телефона с кодом страны.');contact.reportValidity();return}
-  status.textContent='Форма пока работает в режиме предпросмотра. Отправка ещё не подключена — ваши данные никуда не отправлены.';
+  const endpoint=document.querySelector('meta[name=ariva-feedback-endpoint]')?.content;
+  if(!endpoint){status.textContent='Отправка пока не подключена. Свяжитесь с нами по телефону или в Telegram.';return}
+  const submit=form.querySelector('button[type=submit]');
+  const action=form.querySelector('[id$=callback-action]');
+  const method=form.elements.method.value;
+  const payload={name:form.elements.name.value.trim(),method,messenger:method==='messenger'?form.elements.messenger.value:null,contact:contact.value.trim(),consent:form.elements.consent.checked,website:form.elements.website?.value||''};
+  sending=true;submit.disabled=true;form.setAttribute('aria-busy','true');action.textContent='Отправляем…';status.textContent='';
+  try{
+   const result=await fetch(endpoint,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(payload),signal:AbortSignal.timeout(18000)});
+   const data=await result.json();
+   if(!result.ok||data.ok!==true)throw new Error('delivery_failed');
+   form.reset();Object.keys(drafts).forEach(key=>drafts[key]='');contact.value='';update();
+   status.textContent='Спасибо! Заявка отправлена. Свяжемся в рабочее время.';
+  }catch{
+   status.textContent='Не удалось отправить заявку. Попробуйте ещё раз или свяжитесь с нами по телефону или в Telegram.';
+  }finally{
+   sending=false;submit.disabled=false;form.removeAttribute('aria-busy');action.textContent=form.elements.method.value==='messenger'?'Напишите мне':'Перезвоните мне';
+  }
  });
  form.elements.name.addEventListener('input',()=>form.elements.name.setCustomValidity(''));
- const policy=document.querySelector('#callback-policy');
- form.querySelector('.policy-link').addEventListener('click',()=>policy.showModal());
+ form.querySelector('.policy-link').addEventListener('click',()=>{window.location.href='privacy.html'});
 
  update();
  });

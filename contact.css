@@ -20,3 +20,5 @@
 .faq-section{padding:30px 0 85px;scroll-margin-top:30px}.faq-section h2{font-size:clamp(28px,3vw,42px);margin:16px 0 30px;letter-spacing:-1.4px}.faq-list{border-top:1px solid #ded9e6}.faq-list details{border-bottom:1px solid #ded9e6}.faq-list summary{cursor:pointer;list-style:none;display:flex;justify-content:space-between;gap:24px;padding:24px 0;font-size:16px;font-weight:550}.faq-list summary::-webkit-details-marker{display:none}.faq-list summary span{color:#9682ba;font-size:24px;transition:transform .3s}.faq-list details[open] summary span{transform:rotate(45deg)}.faq-list details p{max-width:750px;font-size:14px;line-height:1.8;color:#81798c;margin:0 0 25px}
 @media(max-width:480px){.callback-dialog{padding:30px 22px}.callback-dialog h2{font-size:27px}.faq-section{padding-bottom:50px}.faq-list summary{font-size:14px}.faq-list details p{font-size:12px}}
 @media(prefers-reduced-motion:reduce){.callback-dialog[open]{animation:none}}
+
+.callback-honeypot{display:none!important}.callback-submit:disabled{opacity:.65;cursor:wait;transform:none}
