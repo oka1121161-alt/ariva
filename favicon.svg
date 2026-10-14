@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 72 72" width="72" height="72"><title>ARIVA</title><defs><linearGradient id="symbol-gradient" x1="17" y1="13" x2="57" y2="65" gradientUnits="userSpaceOnUse">
+   <stop stop-color="#242635"/><stop offset="1" stop-color="#5E4C8D"/>
+  </linearGradient></defs><rect width="72" height="72" rx="16" fill="#fff"/><g transform="translate(3.5 .5)"><g id="ariva-symbol" fill="url(#symbol-gradient)">
+  <path d="M30 5 23 18 49 66H62L30 5Z"/>
+  <path d="M3 66H16C18 53 26 45 35 43 19 43 9 52 3 66Z"/>
+ </g></g></svg>
